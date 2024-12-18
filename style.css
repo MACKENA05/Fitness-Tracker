@@ -17,7 +17,7 @@ body {
 
 header {
     text-align: center;
-    background-color: bisque;
+    background-color: #7E8287;
     color: black;
     padding: 30px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -39,6 +39,44 @@ header p {
     padding-left: 70px;
     color: #007bff;
 }
+/* Navigation Bar */
+nav {
+    background-color:#7E8287;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky; /* Sticks to the top of the screen on scroll */
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    margin: 0;
+    padding: 10px 0;
+    list-style: none;
+}
+
+.navbar li {
+    display: inline;
+}
+
+.navbar a {
+    color:black;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar a:hover {
+    background-color: white;
+    color: hsl(182, 82%, 39%);
+    transform: scale(1.1);
+}
+
 /* main section */
 main{
     width: 90%;
@@ -72,18 +110,24 @@ button:hover {
 button:active {
     transform: translateY(0);
 }
+h2 {
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    color: #ddd;
+}
 /* Exercise Display */
 .exercise-container {
     display: grid;
     gap: 20px;
     padding: 20px;
-    background-color: white;
+    background-color: #8C8D8C;
     border-radius: 12px;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
 }
 
 .exercise-item {
-    background-color: #fff;
+    background-color:white;
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
@@ -120,7 +164,7 @@ button:active {
 
 /* Forms and Inputs */
 form {
-    background-color: white;
+    background-color: #8C8D8C;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
@@ -136,7 +180,7 @@ form label {
 
 form input {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -163,17 +207,18 @@ form button:hover {
 
 /* Summary and Goals */
 #summary-info, #goal-status {
-    background-color: white;
+    background-color: #8C8D8C;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-#summary-info h3, #goal-status h3 {
+#summary-info h2, #goal-status h2 {
     margin-bottom: 15px;
-    font-size: 1.6rem;
-    color: #333;
+    font-size: 30px;
+    color:whitesmoke;
+
 }
 
 #goal-status div {
@@ -195,7 +240,7 @@ form button:hover {
 footer {
     text-align: center;
     padding: 20px 0;
-    background-color: bisque;
+    background-color: #7e8287;
     color: black;
     font-size: 1rem;
     margin-top: 20px;
