@@ -13,10 +13,6 @@ const nonEquipmentBtn = document.getElementById('non-equipment-btn');
 const equipmentBtn = document.getElementById('equipment-btn');
 const exerciseDisplay = document.getElementById('exercise-display');
 
-// Visibility Flags
-let isNonEquipmentVisible = false;
-let isEquipmentVisible = false;
-
 // Fetch and display exercises
 function fetchExercises() {
     return fetch(`${API_URL}/exercises`)
@@ -56,34 +52,52 @@ function renderExercises(exercises, category) {
         exerciseDisplay.appendChild(exerciseElement);
     });
 }
-//button click event listener
-nonEquipmentBtn.addEventListener("click", function () {
+let isNonEquipmentVisible = false;
+let isEquipmentVisible = false;
+
+// Button event listeners for exercise categories
+nonEquipmentBtn.addEventListener("click", function() {
     if (isNonEquipmentVisible) {
         exerciseDisplay.innerHTML = ""; // Hide exercises
         isNonEquipmentVisible = false;
     } else {
-        fetchExercises().then(function (exercises) {
+        fetchExercises().then(function(exercises) {
             renderExercises(exercises, "Non-Equipment"); // Show exercises
             isNonEquipmentVisible = true;
             isEquipmentVisible = false; // Hide the other category
-        }).catch(function (error) {
+        }).catch(function(error) {
             console.error("Error fetching non-equipment exercises:", error);
         });
     }
 });
 
-equipmentBtn.addEventListener("click", function () {
+equipmentBtn.addEventListener("click", function() {
     if (isEquipmentVisible) {
         exerciseDisplay.innerHTML = ""; // Hide exercises
         isEquipmentVisible = false;
     } else {
-        fetchExercises().then(function (exercises) {
+        fetchExercises().then(function(exercises) {
             renderExercises(exercises, "Equipment"); // Show exercises
             isEquipmentVisible = true;
             isNonEquipmentVisible = false; // Hide the other category
-        }).catch(function (error) {
+        }).catch(function(error) {
             console.error("Error fetching equipment exercises:", error);
         });
     }
 });
-debugger;
+function calculateCalories(duration, weight, MET) {
+    if (isNaN(duration) || isNaN(weight) || isNaN(MET)) {
+        console.error("Invalid input for calories calculation.");
+        return 0;
+    }
+
+    if (duration <= 0 || weight <= 0 || MET <= 0) {
+        console.error("Invalid input: Duration, weight, and MET must be positive values.");
+        return 0;
+    }
+    const calories = ((MET * 3.5 * weight) / 200) * duration;
+    console.log("Calories burned:", calories);
+    return calories;
+}
+
+
