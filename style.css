@@ -37,7 +37,7 @@ header p {
     font-size: 20px;
     margin-top: 10px;
     padding-left: 70px;
-    color: #007bff;
+    color: orange;
 }
 /* Navigation Bar */
 nav {
@@ -185,13 +185,13 @@ form input {
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
-    background-color: #f9f9f9;
+    background-color:#cccccc;
 }
 
 form button {
     width: 100%;
     padding: 12px;
-    background-color:  hsl(182, 82%, 39%);
+    background-color: #050505;
     color: white;
     border: none;
     border-radius: 25px;
@@ -202,7 +202,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #45a049;
+    background-color:hsl(182, 82%, 39%);
 }
 
 /* Summary and Goals */
@@ -231,8 +231,7 @@ form button:hover {
 }
 
 #goal-status div > div {
-    background-color: #4CAF50;
-    height: 100%;
+    background-color: hsl(182, 82%, 39%);
     border-radius: 10px;
 }
 
