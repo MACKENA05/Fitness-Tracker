@@ -138,3 +138,26 @@ fetchExercises().then(exercises => {
     console.error("Error fetching exercises:", error);
 });
 });
+
+ // Post workout data
+ fetch(`${API_URL}/workouts`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(workoutData),
+})
+    .then(function (response) {
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+        return response.json(); // Parse response as JSON
+    })
+    .then(function (newWorkout) {
+        console.log("Workout added:", newWorkout);
+        fetchWorkouts(); // Refresh workouts
+        logWorkoutForm.reset(); // Clear form
+    })
+    .catch(function (error) {
+        console.error("Error adding workout:", error.message);
+    });
