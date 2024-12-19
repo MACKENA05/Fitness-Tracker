@@ -1,5 +1,4 @@
 const API_URL = "http://localhost:3000"; //API URL for JSON Server
-
 //DOM ELEMENTS
 const logWorkoutForm = document.getElementById('log-workout-form');
 const workoutType = document.getElementById('workout-type');
@@ -32,4 +31,28 @@ function fetchExercises() {
             return []; // Return an empty array in case of an error
         });
 }
+//Render exercises with GIF display functionality
+function renderExercises(exercises, category) {
+    exerciseDisplay.innerHTML = ""; // Clear the display area
 
+    const filteredExercises = exercises.filter(
+        (exercise) => exercise.category.toLowerCase() === category.toLowerCase()
+    );
+
+    if (filteredExercises.length === 0) {
+        exerciseDisplay.innerHTML = `<p>No exercises found for this category.</p>`;
+        return;
+    }
+
+    filteredExercises.forEach((exercise) => {
+        const exerciseElement = document.createElement("div");
+        exerciseElement.classList.add("exercise-item");
+        exerciseElement.innerHTML = `
+            <h4>${exercise.name}</h4>
+            <img src="${exercise.mediaURL || 'placeholder.gif'}" alt="${exercise.name}" class="exercise-gif" />
+            <p>${exercise.description}</p>
+            <p><strong>MET:</strong> ${exercise.MET}</p>
+        `;
+        exerciseDisplay.appendChild(exerciseElement);
+    });
+}
