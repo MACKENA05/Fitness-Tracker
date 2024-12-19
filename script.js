@@ -99,5 +99,42 @@ function calculateCalories(duration, weight, MET) {
     console.log("Calories burned:", calories);
     return calories;
 }
+//submitting work out form
+logWorkoutForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent form submission
 
 
+const workoutType = document.getElementById('workout-type').value.trim();
+const duration = parseFloat(document.getElementById('duration').value);
+const weight = parseFloat(document.getElementById('user-weight').value);
+
+// Check if all fields are valid
+if (!workoutType || isNaN(duration) || isNaN(weight)) {
+    alert("Please fill in all fields with valid data.");
+    return;
+}
+
+// Fetch exercises from the database to get the MET value for the selected workout type
+fetchExercises().then(exercises => {
+    const selectedExercise = exercises.find(exercise => exercise.name.toLowerCase() === workoutType.toLowerCase());
+
+    if (selectedExercise) {
+        const MET = selectedExercise.MET; // Get the MET value from the selected exercise
+        const caloriesBurned = calculateCalories(duration, weight, MET); // Calculate the calories burned
+
+        console.log(`Calories burned: ${caloriesBurned} kcal for ${workoutType} (Duration: ${duration} mins, Weight: ${weight} kg)`);
+
+        // Optionally, display the result on the page
+        document.getElementById('summary-info').innerHTML = `
+            <h4>Workout Summary</h4>
+            <p><strong>Exercise:</strong> ${workoutType}</p>
+            <p><strong>Duration:</strong> ${duration} minutes</p>
+            <p><strong>Calories Burned:</strong> ${caloriesBurned} kcal</p>
+        `;
+    } else {
+        alert("Exercise not found in the database.");
+    }
+}).catch(error => {
+    console.error("Error fetching exercises:", error);
+});
+});
