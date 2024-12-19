@@ -277,3 +277,8 @@ function updateGoalProgress(caloriesBurned) {
         .catch(error => console.error("Error fetching goals:", error));
 }
 
+
+// Initialize data fetch
+fetchWorkouts();
+fetchGoal();
+fetchExercises();
