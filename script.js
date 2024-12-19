@@ -200,6 +200,7 @@ function renderWorkoutSummary(workouts) {
         <p><strong>Total Calories Burned:</strong> ${totalCalories} kcal</p>
     `;
 }
+//fetch the goal progress
 function fetchGoal() {
     fetch(`${API_URL}/fitnessGoals`)
         .then(response => {
@@ -221,4 +222,24 @@ function fetchGoal() {
         });
 }
 
+//rendered goals progress
+function renderGoalProgress(goal) {
+    if (goal) {
+        const totalCaloriesBurned = goal.caloriesBurned;  // Calories burned so far
+        const targetCalories = goal.targetCalories;      // The goal the user wants to reach
+        const progressPercentage = ((totalCaloriesBurned / targetCalories) * 100).toFixed(2);
 
+        goalStatus.innerHTML = `
+            <h3>My Goal Progress</h3>
+            <p><strong>Goal:</strong> ${goal.description}</p>
+            <p><strong>Target Calories:</strong> ${targetCalories} kcal</p>
+            <p><strong>Calories Burned:</strong> ${totalCaloriesBurned} kcal</p>
+            <p><strong>Progress:</strong> ${progressPercentage}% completed</p>
+            <div style="background-color: lightgray; border-radius: 5px; height: 20px;">
+                <div style="width: ${progressPercentage}%; background-color: green; height: 100%; border-radius: 5px;"></div>
+            </div>
+        `;
+    }
+}
+
+//update goal progress
