@@ -143,6 +143,14 @@
       "category": "Non-Equipment",
       "MET": 4.5,
       "mediaURL": "./images/lunge.gif"
+    },
+    {
+      "id": "19",
+      "name": "Running",
+      "description": "Run at a steady pace for cardiovascular health. Adjust the speed and intensity depending on your fitness level and goals.",
+      "category": "Non-Equipment",
+      "MET": 9,
+      "mediaURL": "./mages/running.gif"
     }
   ],
   "workouts": [
