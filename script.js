@@ -161,3 +161,48 @@ fetchExercises().then(exercises => {
     .catch(function (error) {
         console.error("Error adding workout:", error.message);
     });
+
+    // Fetch and display workouts
+function fetchWorkouts() {
+    fetch(`${API_URL}/workouts`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP Error: ${response.status}`);
+            }
+            return response.json(); // Parse the response body as JSON
+        })
+        .then(workouts => {
+            renderWorkoutSummary(workouts); // Call render function with the fetched workouts data
+        })
+        .catch(error => {
+            console.error("Error fetching workouts:", error.message); // Log error if fetching fails
+        });
+}
+
+// Render the workout summary
+function renderWorkoutSummary(workouts) {
+    let totalDuration = 0;
+    let totalCalories = 0;
+
+    // Clear any previous content in the workout summary
+    workoutSummary.innerHTML = "<h3>My Workouts</h3>";
+
+    // Iterate over the fetched workouts and display them
+    workouts.forEach(workout => {
+        totalDuration += workout.duration;
+        totalCalories += workout.calories;
+
+        // Create a new element for each workout
+        const workoutElement = document.createElement("div");
+        workoutElement.innerHTML = `
+            <p><strong>${workout.type}</strong> | ${workout.duration} mins | ${workout.calories} calories | ${workout.date}</p>
+        `;
+        workoutSummary.appendChild(workoutElement); // Add the workout element to the DOM
+    });
+
+    // Display the total duration and total calories burned
+    workoutSummary.innerHTML += `
+        <p><strong>Total Duration:</strong> ${totalDuration} mins</p>
+        <p><strong>Total Calories Burned:</strong> ${totalCalories} kcal</p>
+    `;
+}
