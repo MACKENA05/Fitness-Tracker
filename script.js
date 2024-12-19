@@ -1,5 +1,6 @@
-const API_URL = "http://localhost:3000"; //API URL for JSON Server
-//DOM ELEMENTS
+const API_URL = "http://localhost:4000"; //API URL for JSON Server
+
+// DOM ELEMENTS
 const logWorkoutForm = document.getElementById('log-workout-form');
 const workoutType = document.getElementById('workout-type');
 const duration = document.getElementById('duration');
@@ -27,7 +28,8 @@ function fetchExercises() {
             return []; // Return an empty array in case of an error
         });
 }
-//Render exercises with GIF display functionality
+
+// Render exercises with GIF display functionality
 function renderExercises(exercises, category) {
     exerciseDisplay.innerHTML = ""; // Clear the display area
 
@@ -52,6 +54,7 @@ function renderExercises(exercises, category) {
         exerciseDisplay.appendChild(exerciseElement);
     });
 }
+
 let isNonEquipmentVisible = false;
 let isEquipmentVisible = false;
 
@@ -85,6 +88,8 @@ equipmentBtn.addEventListener("click", function() {
         });
     }
 });
+
+// Calculate calories burned based on MET, weight, and duration
 function calculateCalories(duration, weight, MET) {
     if (isNaN(duration) || isNaN(weight) || isNaN(MET)) {
         console.error("Invalid input for calories calculation.");
@@ -99,71 +104,81 @@ function calculateCalories(duration, weight, MET) {
     console.log("Calories burned:", calories);
     return calories;
 }
-//submitting work out form
+
+// Submit workout form
 logWorkoutForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent form submission
 
+    const workoutType = document.getElementById('workout-type').value.trim();
+    const duration = parseFloat(document.getElementById('duration').value);
+    const weight = parseFloat(document.getElementById('user-weight').value);
 
-const workoutType = document.getElementById('workout-type').value.trim();
-const duration = parseFloat(document.getElementById('duration').value);
-const weight = parseFloat(document.getElementById('user-weight').value);
-
-// Check if all fields are valid
-if (!workoutType || isNaN(duration) || isNaN(weight)) {
-    alert("Please fill in all fields with valid data.");
-    return;
-}
-
-// Fetch exercises from the database to get the MET value for the selected workout type
-fetchExercises().then(exercises => {
-    const selectedExercise = exercises.find(exercise => exercise.name.toLowerCase() === workoutType.toLowerCase());
-
-    if (selectedExercise) {
-        const MET = selectedExercise.MET; // Get the MET value from the selected exercise
-        const caloriesBurned = calculateCalories(duration, weight, MET); // Calculate the calories burned
-
-        console.log(`Calories burned: ${caloriesBurned} kcal for ${workoutType} (Duration: ${duration} mins, Weight: ${weight} kg)`);
-
-        // Optionally, display the result on the page
-        document.getElementById('summary-info').innerHTML = `
-            <h4>Workout Summary</h4>
-            <p><strong>Exercise:</strong> ${workoutType}</p>
-            <p><strong>Duration:</strong> ${duration} minutes</p>
-            <p><strong>Calories Burned:</strong> ${caloriesBurned} kcal</p>
-        `;
-    } else {
-        alert("Exercise not found in the database.");
+    // Check if all fields are valid
+    if (!workoutType || isNaN(duration) || isNaN(weight)) {
+        alert("Please fill in all fields with valid data.");
+        return;
     }
-}).catch(error => {
-    console.error("Error fetching exercises:", error);
-});
-});
 
- // Post workout data
- fetch(`${API_URL}/workouts`, {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify(workoutData),
-})
-    .then(function (response) {
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
+    // Fetch exercises from the database to get the MET value for the selected workout type
+    fetchExercises().then(exercises => {
+        const selectedExercise = exercises.find(exercise => exercise.name.toLowerCase() === workoutType.toLowerCase());
+
+        if (selectedExercise) {
+            const MET = selectedExercise.MET; // Get the MET value from the selected exercise
+            const caloriesBurned = calculateCalories(duration, weight, MET); // Calculate the calories burned
+
+            console.log(`Calories burned: ${caloriesBurned} kcal for ${workoutType} (Duration: ${duration} mins, Weight: ${weight} kg)`);
+
+            // Optionally, display the result on the page
+            document.getElementById('summary-info').innerHTML = `
+                <h4>Workout Summary</h4>
+                <p><strong>Exercise:</strong> ${workoutType}</p>
+                <p><strong>Duration:</strong> ${duration} minutes</p>
+                <p><strong>Calories Burned:</strong> ${caloriesBurned} kcal</p>
+            `;
+
+            // Prepare workout data to be posted to the server
+            const workoutData = {
+                type: workoutType,
+                duration: duration,
+                weight: weight,
+                calories: caloriesBurned,
+                date: new Date().toISOString() // Adding a timestamp
+            };
+
+            // Post workout data
+            fetch(`${API_URL}/workouts`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(workoutData),
+            })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error(`HTTP Error: ${response.status}`);
+                    }
+                    return response.json(); // Parse response as JSON
+                })
+                .then(function (newWorkout) {
+                    console.log("Workout added:", newWorkout);
+                    updateGoalProgress(newWorkout.calories);  // Update goal progress with the new workout's calories
+                    fetchWorkouts(); // Refresh workouts
+                    logWorkoutForm.reset(); // Clear form
+                })
+                .catch(function (error) {
+                    console.error("Error adding workout:", error.message);
+                });
+
+        } else {
+            alert("Exercise not found in the database.");
         }
-        return response.json(); // Parse response as JSON
-    })
-    .then(function (newWorkout) {
-        console.log("Workout added:", newWorkout);
-        updateGoalProgress(newWorkout.calories);  // Update goal progress with the new workout's calories
-        fetchWorkouts(); // Refresh workouts
-        logWorkoutForm.reset(); // Clear form
-    })
-    .catch(function (error) {
-        console.error("Error adding workout:", error.message);
+    }).catch(error => {
+        console.error("Error fetching exercises:", error);
     });
+});
 
-    // Fetch and display workouts
+// Fetch and display workouts
 function fetchWorkouts() {
     fetch(`${API_URL}/workouts`)
         .then(response => {
@@ -179,6 +194,7 @@ function fetchWorkouts() {
             console.error("Error fetching workouts:", error.message); // Log error if fetching fails
         });
 }
+
 // Render workout summary
 function renderWorkoutSummary(workouts) {
     let totalDuration = 0;
@@ -201,7 +217,8 @@ function renderWorkoutSummary(workouts) {
         <p><strong>Total Calories Burned:</strong> ${totalCalories} kcal</p>
     `;
 }
-//fetch the goal progress
+
+// Fetch the goal progress
 function fetchGoal() {
     fetch(`${API_URL}/fitnessGoals`)
         .then(response => {
@@ -223,7 +240,7 @@ function fetchGoal() {
         });
 }
 
-//rendered goals progress
+// Render goal progress
 function renderGoalProgress(goal) {
     if (goal) {
         const totalCaloriesBurned = goal.caloriesBurned;  // Calories burned so far
@@ -240,10 +257,20 @@ function renderGoalProgress(goal) {
                 <div style="width: ${progressPercentage}%; background-color: green; height: 100%; border-radius: 5px;"></div>
             </div>
         `;
+        goalStatus.innerHTML += `<h3>Daily Progress</h3>`;
+        Object.keys(dailyProgress).forEach((date) => {
+            goalStatus.innerHTML += `
+                <p><strong>${date}:</strong> ${dailyProgress[date]} kcal</p>
+            `;
+        });
+
+        if (progressPercentage >= 100) {
+            alert("Congratulations! You've achieved your calorie-burning goal!");
+        }
     }
 }
 
-//update goal progress
+// Update goal progress when workout is logged
 function updateGoalProgress(caloriesBurned) {
     fetch(`${API_URL}/fitnessGoals`)
         .then(response => response.json())
@@ -277,8 +304,7 @@ function updateGoalProgress(caloriesBurned) {
         .catch(error => console.error("Error fetching goals:", error));
 }
 
-
-// Initialize data fetch
-fetchWorkouts();
-fetchGoal();
+// Initialize
+fetchGoal(); // Display the current goal when the page loads
+fetchWorkouts(); // Display workout summary on page load
 fetchExercises();
