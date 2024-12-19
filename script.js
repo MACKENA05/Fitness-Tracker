@@ -18,4 +18,18 @@ const exerciseDisplay = document.getElementById('exercise-display');
 let isNonEquipmentVisible = false;
 let isEquipmentVisible = false;
 
+// Fetch and display exercises
+function fetchExercises() {
+    return fetch(`${API_URL}/exercises`)
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error(`HTTP Error: ${response.status}`);
+            }
+            return response.json(); // Parse and return the JSON data
+        })
+        .catch(function (error) {
+            console.error("Error fetching exercises:", error.message);
+            return []; // Return an empty array in case of an error
+        });
+}
 
