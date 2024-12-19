@@ -1,199 +1,217 @@
 {
-    "exercises": [
-      {
-        "id": "1",
-        "name": "Push-Ups",
-        "description": "Start in a high plank position with your hands slightly wider than shoulder-width apart, your body in a straight line from head to heels. Lower your body by bending your elbows, keeping them close to your sides, until your chest is just above the ground. Push back up to the starting position. Keep your core tight, and avoid sagging or arching your back.",
-        "category": "Non-Equipment",
-        "MET": 3.8,
-        "mediaURL": "./images/pushup.gif"
-      },
-      {
-        "id": "2",
-        "name": "Plank",
-        "description": "Start in a forearm plank position with your elbows directly under your shoulders and your body in a straight line from head to heels. Engage your core by pulling your belly button toward your spine. Hold this position without letting your hips sag or rise. Breathe steadily throughout.",
-        "category": "Non-Equipment",
-        "MET": 3.3,
-        "mediaURL": "./images/plank.gif"
-      },
-      {
-        "id": "3",
-        "name": "Squats",
-        "description": "Stand with your feet shoulder-width apart, toes slightly turned out. Push your hips back and bend your knees to lower your body as if sitting into a chair. Keep your chest up and your weight in your heels. Lower until your thighs are parallel to the ground, then push through your heels to return to standing. Keep your knees aligned with your toes throughout.",
-        "category": "Non-Equipment",
-        "MET": 4.5,
-        "mediaURL": "./images/Sqaut_Exercises.gif"
-      },
-      {
-        "id": "4",
-        "name": "Burpees",
-        "description": " A burpee starts with a squat, then the feet shoot back so the body is in a push up position, the hands touch the floor then you come back up and do a push up and then you jump up.",
-        "category": "Non-Equipment",
-        "MET": 8,
-        "mediaURL": "./images/burpee.gif"
-      },
-      {
-        "id": "5",
-        "name": "Jumping Jacks",
-        "description": "Stand upright with your feet together and arms at your sides. Jump your feet out while raising your arms above your head. Immediately jump back to the starting position and repeat. Maintain a steady rhythm and avoid locking your knees during the jumps.",
-        "category": "Non-Equipment",
-        "MET": 8,
-        "mediaURL": "./images/jumpingjacks.gif"
-      },
-      {
-        "id": "6",
-        "name": "Mountain Climbers",
-        "description": "Start in a high plank position with your shoulders over your wrists and your body in a straight line. Drive one knee toward your chest while keeping the other leg extended. Quickly switch legs, mimicking a running motion. Keep your core tight and hips level throughout the exercise.",
-        "category": "Non-Equipment",
-        "MET": 6,
-        "mediaURL": "./images/mountain climbers.gif"
-      },
-      {
-        "id": "7",
-        "name": "Cycling (Stationary)",
-        "description": "Adjust the seat height so that your legs are slightly bent at the bottom of the pedal stroke. Grip the handlebars lightly and maintain an upright posture. Start pedaling at a moderate resistance, gradually increasing the intensity as you go. Keep your movements smooth and steady.",
-        "category": "Equipment",
-        "MET": 7.5,
-        "mediaURL": "./images/cycling.gif"
-      },
-      {
-        "id": "8",
-        "name": "Treadmill Running",
-        "description": "Set the treadmill to a comfortable speed and incline (if desired). Start with a light jog to warm up, then increase the speed to your target pace. Keep your posture upright, arms at a 90-degree angle, and land softly on the balls of your feet. Focus on consistent breathing.",
-        "category": "Equipment",
-        "MET": 9.8,
-        "mediaURL": "./images/treadmill.gif"
-      },
-      {
-        "id": "9",
-        "name": "Weightlifting",
-        "description": "Choose an appropriate weight for your strength level. Perform exercises like curls, presses, or rows with controlled movements. Keep your back straight, engage your core, and avoid using momentum to lift the weights.",
-        "category": "Equipment",
-        "MET": 6,
-        "mediaURL": "./images/weightlifting.gif"
-      },
-      {
-        "id": "10",
-        "name": "Rowing Machine",
-        "description": "Sit on the rowing machine with your feet securely strapped in. Grab the handle with both hands and start by pushing off with your legs, keeping your back straight. As your legs extend, pull the handle toward your chest. Reverse the motion to return to the starting position.",
-        "category": "Equipment",
-        "MET": 8,
-        "mediaURL": "./images/rowing machine.gif"
-      },
-      {
-        "id": "11",
-        "name": "Elliptical Machine",
-        "description": "Step onto the elliptical pedals and hold the handles. Begin pedaling with smooth, circular motions. Adjust the resistance to match your desired intensity. Maintain an upright posture and use the handles to engage your upper body as well.",
-        "category": "Equipment",
-        "MET": 5,
-        "mediaURL": "./images/eleptical machine.gif"
-      },
-      {
-        "id": "12",
-        "name": "Pull-Ups",
-        "description": "Grab a pull-up bar with an overhand grip, hands slightly wider than shoulder-width apart. Start from a dead hang, then pull yourself up until your chin clears the bar. Lower yourself back down with control. Engage your back and avoid swinging your legs.",
-        "category": "Non-Equipment",
-        "MET": 4,
-        "mediaURL": "./images/pull-up-dribbble.gif"
-      },
-      {
-        "id": "13",
-        "name": "Bench Press",
-        "description": "Lie on a bench with your feet flat on the ground. Grip the barbell slightly wider than shoulder-width apart. Lower the barbell to your chest with control, then push it back up until your arms are fully extended. Keep your core tight and avoid arching your back.",
-        "category": "Equipment",
-        "MET": 5,
-        "mediaURL": "./images/Bench-Press.gif"
-      },
-      {
-        "id": "14",
-        "name": "Kettlebell Swings",
-        "description": "Stand with your feet shoulder-width apart and hold a kettlebell with both hands. Hinge at your hips and swing the kettlebell back between your legs. Explosively drive your hips forward to swing the kettlebell to chest height. Let the momentum bring it back down and repeat.",
-        "category": "Equipment",
-        "MET": 6.8,
-        "mediaURL": "./images/kettlebell.gif"
-      },
-      {
-        "id": "15",
-        "name": "Yoga",
-        "description": "Move through a series of poses like downward dog, warrior, and child’s pose. Focus on deep breathing and holding each position to stretch and strengthen muscles. Maintain a calm and steady pace.",
-        "category": "Non-Equipment",
-        "MET": 2.5,
-        "mediaURL": "./images/yoga.jpg"
-      },
-      {
-        "id": "16",
-        "name": "Box Jumps",
-        "description": "Stand in front of a sturdy box or platform. Bend your knees and swing your arms back. Explode upward, jumping onto the box, landing softly with both feet. Stand up fully, then step back down and repeat.",
-        "category": "Non-Equipment",
-        "MET": 7,
-        "mediaURL": "./images/box jump.gif"
-      },
-      {
-        "id": "17",
-        "name": "Deadlifts",
-        "description": "Stand with your feet hip-width apart and grip a barbell just outside your knees. Keep your back straight and chest up as you lift the barbell by straightening your legs and hips. Lower the barbell back down with control.",
-        "category": "Equipment",
-        "MET": 5.5,
-        "mediaURL": "./images/deadlift.gif"
-      },
-      {
-        "id": "18",
-        "name": "Lunges",
-        "description": "Step forward with one leg, lowering your hips until both knees are bent at about a 90-degree angle. Keep your front knee aligned over your ankle. Push back to the starting position and switch legs.",
-        "category": "Non-Equipment",
-        "MET": 4.5,
-        "mediaURL": "./images/lunge.gif"
-      }
-    ],
-    "workouts": [
-      {
-        "id": "a57e",
-        "type": "running",
-        "duration": 30,
-        "calories": 343,
-        "date": "12/17/2024, 2:42:24 PM"
-      },
-      {
-        "id": "96f0",
-        "type": "yoga",
-        "duration": 20,
-        "calories": 70,
-        "date": "12/17/2024, 5:11:40 PM"
-      },
-      {
-        "id": "8630",
-        "type": "plank",
-        "duration": 5,
-        "weight": 70,
-        "date": "2024-12-17T18:00:13.030Z",
-        "calories": 49
-      },
-      {
-        "id": "04cf",
-        "type": "running",
-        "duration": 20,
-        "weight": 70,
-        "date": "2024-12-17T18:08:38.014Z",
-        "calories": 196
-      },
-      {
-        "id": "3a17",
-        "type": "running",
-        "duration": 10,
-        "weight": 70,
-        "date": "2024-12-17T18:09:28.150Z",
-        "calories": 98
-      }
-    ],
-    "fitnessGoals": [
-      {
-        "id": "155c",
-        "description": "burn 500 calories",
-        "targetCalories": 1000,
-        "caloriesBurned": 413,
-        "dailyProgress": {
-          "12/17/2024": 413
-        }
-      }
-    ]
-  }
+  "exercises": [
+    {
+      "id": "1",
+      "name": "Push-Ups",
+      "description": "Start in a high plank position with your hands slightly wider than shoulder-width apart, your body in a straight line from head to heels. Lower your body by bending your elbows, keeping them close to your sides, until your chest is just above the ground. Push back up to the starting position. Keep your core tight, and avoid sagging or arching your back.",
+      "category": "Non-Equipment",
+      "MET": 3.8,
+      "mediaURL": "./images/pushup.gif"
+    },
+    {
+      "id": "2",
+      "name": "Plank",
+      "description": "Start in a forearm plank position with your elbows directly under your shoulders and your body in a straight line from head to heels. Engage your core by pulling your belly button toward your spine. Hold this position without letting your hips sag or rise. Breathe steadily throughout.",
+      "category": "Non-Equipment",
+      "MET": 3.3,
+      "mediaURL": "./images/plank.gif"
+    },
+    {
+      "id": "3",
+      "name": "Squats",
+      "description": "Stand with your feet shoulder-width apart, toes slightly turned out. Push your hips back and bend your knees to lower your body as if sitting into a chair. Keep your chest up and your weight in your heels. Lower until your thighs are parallel to the ground, then push through your heels to return to standing. Keep your knees aligned with your toes throughout.",
+      "category": "Non-Equipment",
+      "MET": 4.5,
+      "mediaURL": "./images/Sqaut_Exercises.gif"
+    },
+    {
+      "id": "4",
+      "name": "Burpees",
+      "description": " A burpee starts with a squat, then the feet shoot back so the body is in a push up position, the hands touch the floor then you come back up and do a push up and then you jump up.",
+      "category": "Non-Equipment",
+      "MET": 8,
+      "mediaURL": "./images/burpee.gif"
+    },
+    {
+      "id": "5",
+      "name": "Jumping Jacks",
+      "description": "Stand upright with your feet together and arms at your sides. Jump your feet out while raising your arms above your head. Immediately jump back to the starting position and repeat. Maintain a steady rhythm and avoid locking your knees during the jumps.",
+      "category": "Non-Equipment",
+      "MET": 8,
+      "mediaURL": "./images/jumpingjacks.gif"
+    },
+    {
+      "id": "6",
+      "name": "Mountain Climbers",
+      "description": "Start in a high plank position with your shoulders over your wrists and your body in a straight line. Drive one knee toward your chest while keeping the other leg extended. Quickly switch legs, mimicking a running motion. Keep your core tight and hips level throughout the exercise.",
+      "category": "Non-Equipment",
+      "MET": 6,
+      "mediaURL": "./images/mountain climbers.gif"
+    },
+    {
+      "id": "7",
+      "name": "Cycling (Stationary)",
+      "description": "Adjust the seat height so that your legs are slightly bent at the bottom of the pedal stroke. Grip the handlebars lightly and maintain an upright posture. Start pedaling at a moderate resistance, gradually increasing the intensity as you go. Keep your movements smooth and steady.",
+      "category": "Equipment",
+      "MET": 7.5,
+      "mediaURL": "./images/cycling.gif"
+    },
+    {
+      "id": "8",
+      "name": "Treadmill Running",
+      "description": "Set the treadmill to a comfortable speed and incline (if desired). Start with a light jog to warm up, then increase the speed to your target pace. Keep your posture upright, arms at a 90-degree angle, and land softly on the balls of your feet. Focus on consistent breathing.",
+      "category": "Equipment",
+      "MET": 9.8,
+      "mediaURL": "./images/treadmill.gif"
+    },
+    {
+      "id": "9",
+      "name": "Weightlifting",
+      "description": "Choose an appropriate weight for your strength level. Perform exercises like curls, presses, or rows with controlled movements. Keep your back straight, engage your core, and avoid using momentum to lift the weights.",
+      "category": "Equipment",
+      "MET": 6,
+      "mediaURL": "./images/weightlifting.gif"
+    },
+    {
+      "id": "10",
+      "name": "Rowing Machine",
+      "description": "Sit on the rowing machine with your feet securely strapped in. Grab the handle with both hands and start by pushing off with your legs, keeping your back straight. As your legs extend, pull the handle toward your chest. Reverse the motion to return to the starting position.",
+      "category": "Equipment",
+      "MET": 8,
+      "mediaURL": "./images/rowing machine.gif"
+    },
+    {
+      "id": "11",
+      "name": "Elliptical Machine",
+      "description": "Step onto the elliptical pedals and hold the handles. Begin pedaling with smooth, circular motions. Adjust the resistance to match your desired intensity. Maintain an upright posture and use the handles to engage your upper body as well.",
+      "category": "Equipment",
+      "MET": 5,
+      "mediaURL": "./images/eleptical machine.gif"
+    },
+    {
+      "id": "12",
+      "name": "Pull-Ups",
+      "description": "Grab a pull-up bar with an overhand grip, hands slightly wider than shoulder-width apart. Start from a dead hang, then pull yourself up until your chin clears the bar. Lower yourself back down with control. Engage your back and avoid swinging your legs.",
+      "category": "Non-Equipment",
+      "MET": 4,
+      "mediaURL": "./images/pull-up-dribbble.gif"
+    },
+    {
+      "id": "13",
+      "name": "Bench Press",
+      "description": "Lie on a bench with your feet flat on the ground. Grip the barbell slightly wider than shoulder-width apart. Lower the barbell to your chest with control, then push it back up until your arms are fully extended. Keep your core tight and avoid arching your back.",
+      "category": "Equipment",
+      "MET": 5,
+      "mediaURL": "./images/Bench-Press.gif"
+    },
+    {
+      "id": "14",
+      "name": "Kettlebell Swings",
+      "description": "Stand with your feet shoulder-width apart and hold a kettlebell with both hands. Hinge at your hips and swing the kettlebell back between your legs. Explosively drive your hips forward to swing the kettlebell to chest height. Let the momentum bring it back down and repeat.",
+      "category": "Equipment",
+      "MET": 6.8,
+      "mediaURL": "./images/kettlebell.gif"
+    },
+    {
+      "id": "15",
+      "name": "Yoga",
+      "description": "Move through a series of poses like downward dog, warrior, and child’s pose. Focus on deep breathing and holding each position to stretch and strengthen muscles. Maintain a calm and steady pace.",
+      "category": "Non-Equipment",
+      "MET": 2.5,
+      "mediaURL": "./images/yoga.jpg"
+    },
+    {
+      "id": "16",
+      "name": "Box Jumps",
+      "description": "Stand in front of a sturdy box or platform. Bend your knees and swing your arms back. Explode upward, jumping onto the box, landing softly with both feet. Stand up fully, then step back down and repeat.",
+      "category": "Non-Equipment",
+      "MET": 7,
+      "mediaURL": "./images/box jump.gif"
+    },
+    {
+      "id": "17",
+      "name": "Deadlifts",
+      "description": "Stand with your feet hip-width apart and grip a barbell just outside your knees. Keep your back straight and chest up as you lift the barbell by straightening your legs and hips. Lower the barbell back down with control.",
+      "category": "Equipment",
+      "MET": 5.5,
+      "mediaURL": "./images/deadlift.gif"
+    },
+    {
+      "id": "18",
+      "name": "Lunges",
+      "description": "Step forward with one leg, lowering your hips until both knees are bent at about a 90-degree angle. Keep your front knee aligned over your ankle. Push back to the starting position and switch legs.",
+      "category": "Non-Equipment",
+      "MET": 4.5,
+      "mediaURL": "./images/lunge.gif"
+    }
+  ],
+  "workouts": [
+    {
+      "id": "c1fb",
+      "type": "Running",
+      "duration": 20,
+      "weight": 70,
+      "date": "2024-12-19T18:32:10.012Z",
+      "calories": 196
+    },
+    {
+      "id": "5ec4",
+      "type": "pushups",
+      "duration": 20,
+      "weight": 70,
+      "date": "2024-12-19T18:38:42.723Z",
+      "calories": 196
+    },
+    {
+      "id": "485a",
+      "type": "yoga",
+      "duration": 20,
+      "weight": 70,
+      "date": "2024-12-19T18:39:10.723Z",
+      "calories": 196
+    },
+    {
+      "id": "f034",
+      "type": "running",
+      "duration": 30,
+      "weight": 70,
+      "date": "2024-12-19T18:53:25.029Z",
+      "calories": 294
+    },
+    {
+      "id": "6775",
+      "type": "yoga",
+      "duration": 30,
+      "weight": 70,
+      "date": "2024-12-19T18:53:39.820Z",
+      "calories": 294
+    },
+    {
+      "id": "7be9",
+      "type": "yoga",
+      "duration": 30,
+      "weight": 70,
+      "calories": 294
+    },
+    {
+      "id": "9dc6",
+      "type": "running",
+      "duration": 30,
+      "weight": 70,
+      "calories": 294
+    },
+    {
+      "id": "833c",
+      "workoutType": "running",
+      "duration": 50,
+      "userWeight": 70
+    }
+  ],
+  "fitnessGoals": [
+    {
+      "id": "6000",
+      "goalDescription": "burn 500 calories",
+      "goalCalories": 800
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color:whitesmoke;
+    background-color: #eaeff3;
     color: #333;
     margin: 0;
     padding: 0;
@@ -46,8 +46,8 @@ nav {
 
 .navbar {
     display: flex;
-    justify-content: flex-end;
-    gap: 5px;
+    justify-content:flex-end;
+    gap: 2px;
     margin: 0;
     padding: 10px 0;
     list-style: none;
@@ -113,25 +113,28 @@ h2 {
     color:orange;
 }
 /* Exercise Display */
-.exercise-container {
+#exercise-display {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
-    padding: 20px;
-    background-color: #8C8D8C;
-    border-radius: 12px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
 }
 
 .exercise-item {
-    background-color:white;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    margin-bottom: 10px;
-
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+.exercise-gif {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin: 10px 0;
+}
+
 
 .exercise-item:hover {
     transform: translateY(-5px);
