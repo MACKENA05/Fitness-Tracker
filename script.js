@@ -200,4 +200,25 @@ function renderWorkoutSummary(workouts) {
         <p><strong>Total Calories Burned:</strong> ${totalCalories} kcal</p>
     `;
 }
+function fetchGoal() {
+    fetch(`${API_URL}/fitnessGoals`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error fetching goal data");
+            }
+            return response.json();
+        })
+        .then(goals => {
+            if (goals.length > 0) {
+                const currentGoal = goals[goals.length - 1]; // Use the latest goal
+                renderGoalProgress(currentGoal);
+            } else {
+                goalStatus.innerHTML = "<h3>No goal set yet</h3>";
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching goal:", error);
+        });
+}
+
 
