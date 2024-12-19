@@ -155,6 +155,7 @@ fetchExercises().then(exercises => {
     })
     .then(function (newWorkout) {
         console.log("Workout added:", newWorkout);
+        updateGoalProgress(newWorkout.calories);  // Update goal progress with the new workout's calories
         fetchWorkouts(); // Refresh workouts
         logWorkoutForm.reset(); // Clear form
     })
@@ -243,3 +244,36 @@ function renderGoalProgress(goal) {
 }
 
 //update goal progress
+function updateGoalProgress(caloriesBurned) {
+    fetch(`${API_URL}/fitnessGoals`)
+        .then(response => response.json())
+        .then(goals => {
+            if (goals.length > 0) {
+                const currentGoal = goals[goals.length - 1]; // Get the most recent goal
+                const updatedCalories = currentGoal.caloriesBurned + caloriesBurned;
+
+                // Update the goal's progress
+                const updatedGoal = { 
+                    ...currentGoal, 
+                    caloriesBurned: updatedCalories 
+                };
+
+                // Send the updated goal back to the server
+                fetch(`${API_URL}/fitnessGoals/${currentGoal.id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(updatedGoal)
+                })
+                .then(response => response.json())
+                .then(() => {
+                    console.log("Goal progress updated");
+                    fetchGoal();  // Refresh goal progress display
+                })
+                .catch(error => console.error("Error updating goal progress:", error));
+            }
+        })
+        .catch(error => console.error("Error fetching goals:", error));
+}
+
