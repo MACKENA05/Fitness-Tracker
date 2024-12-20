@@ -155,19 +155,26 @@
   ],
   "workouts": [
     {
-      "id": "240b",
-      "type": "running",
+      "id": "2506",
+      "type": "Squats",
       "duration": 30,
-      "calories": 300,
-      "date": "Friday, December 20, 2024 at 01:24:22 PM"
+      "calories": 157.5,
+      "date": "Friday, December 20, 2024 at 06:34:32 PM"
+    },
+    {
+      "id": "6033",
+      "type": "Weightlifting",
+      "duration": 10,
+      "calories": 70,
+      "date": "Friday, December 20, 2024 at 06:37:38 PM"
     }
   ],
   "fitnessGoals": [
     {
-      "id": "28b8",
+      "id": "d351",
       "goalDescription": "burn 1000 calories daily",
       "targetCalories": 1000,
-      "caloriesBurned": 300
+      "caloriesBurned": 227.5
     }
   ]
 }

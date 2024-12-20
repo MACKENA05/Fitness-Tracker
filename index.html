@@ -3,71 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Tracker</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Fitness App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header section -->
-    <header id="header-section">
-        <h1><img class="header-icon" src="./images/icon.webp" alt="icon">WORKOUT TRACKER</h1>
-        <p>Track your workout, set goals, stay fit</p>
-        <nav>
-            <ul class="navbar">
-                <li><a href="#exercise-header">Exercises</a></li>
-                <li><a href="#log-workout-section">Log a Workout</a></li>
-                <li><a href="#summary-info">Workout Summary</a></li>
-                <li><a href="#goal-section">Set a Fitness Goal</a></li>
-                <li><a href="#goal-status">Goal Progress</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <h2 id="exercise-header">Exercises</h2>
-        <div class="button-container">
-            <button id="non-equipment-btn">Check Out Equipment-Free Workouts</button>
-            <button id="equipment-btn">Check Out Our Equipment Workouts</button>
+        <hr>
+
+        <!-- Exercise Categories -->
+        <div>
+            <button id="non-equipment-btn">Non-Equipment Exercises</button>
+            <button id="equipment-btn">Equipment Exercises</button>
         </div>
-        <div id="exercise-display" class="exercise-container"></div>
+        <div id="exercise-display">
+            <!-- Exercises will be displayed here -->
+        </div>
 
-        <section id="log-workout-section">
-            <h2>Log a Workout</h2>
-            <form id="log-workout-form">
-                <label for="workout-type">Workout Type:</label>
-                <input type="text" id="workout-type" placeholder="e.g., Running, Push-Ups" required>
-                <label for="duration">Duration (in minutes):</label>
-                <input type="number" id="duration" placeholder="e.g., 30" required>
-                <label for="calories">Calories Burned:</label>
-                <input type="number" id="calories" required>
-                <button type="submit">Log Workout</button>
-            </form>
-        </section>
+        <hr>
+    <div>
 
-        <section id="summary-info">
-            <h2>Workout Summary</h2>
-            <p>Your workout details will appear here.</p>
-        </section>
+         <!-- Goal Form -->
+         <h2>Create Goal</h2>
+         <form id="goal-form">
+             <label for="goal-description">Goal Description:</label>
+             <input type="text" id="goal-description" name="goal-description" required><br><br>
+ 
+             <label for="goal-calories">Target Calories:</label>
+             <input type="number" id="goal-calories" name="goal-calories" min="1" required><br><br>
+ 
+             <button type="submit">Set Goal</button>
+         </form>
+ 
+         <hr>
+ 
+         <!-- Goal Progress -->
+         <div id="goal-status">
+             <!-- Goal progress will be displayed here -->
+         </div>
+ 
+    
+        <!-- Workout Form -->
+        <h2>Log Workout</h2>
+        <form id="log-workout-form">
+            <label for="workout-type">Workout Type:</label>
+            <select id="workout-type" name="workout-type" required>
+                <!-- Dynamic workout types will be populated here -->
+            </select><br><br>
 
-        <section id="goal-section">
-            <h2>Set a Fitness Goal</h2>
-            <form id="goal-form">
-                <label for="goal-description">Goal Description:</label>
-                <input type="text" id="goal-description" placeholder="e.g., Burn 1000 calories daily" required>
-                <label for="goal-calories">Target Calories (in kcal):</label>
-                <input type="number" id="goal-calories" placeholder="e.g., 500" required>
-                <button type="submit">Set Goal</button>
-            </form>
-            <div id="goal-status">
-                <h2>Goal Progress</h2>
-                <p>Your goal progress will appear here.</p>
-            </div>
-        </section>
-    </main>
+            <label for="duration">Duration (in minutes):</label>
+            <input type="number" id="duration" name="duration" min="1" required><br><br>
 
-    <footer>
-        <p>&copy; 2024 Workout Tracker. Stay healthy and active!</p>
-    </footer>
+            <label for="user-weight">Your Weight (kg):</label>
+            <input type="number" id="user-weight" name="user-weight" min="1" required><br>
+            <button type="submit">Log Workout</button>
+        </form>
+          <!-- Workout Summary -->
+          <div id="summary-info">
+            <!-- Workout summary will be displayed here -->
+        </div>
+    </div>
 
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

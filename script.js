@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000"; //API URL for JSON Server
+const API_URL = "http://localhost:3000"; // API URL for JSON Server
 
 // DOM ELEMENTS
 const logWorkoutForm = document.getElementById('log-workout-form');
@@ -14,29 +14,18 @@ const nonEquipmentBtn = document.getElementById('non-equipment-btn');
 const equipmentBtn = document.getElementById('equipment-btn');
 const exerciseDisplay = document.getElementById('exercise-display');
 
-// Cache for exercises
-let exercisesCache = [];
-
 // Fetch and display exercises
 function fetchExercises() {
-    if (exercisesCache.length > 0) {
-        return Promise.resolve(exercisesCache); // Use cached data if available
-    }
-
     return fetch(`${API_URL}/exercises`)
-        .then(function (response) {
+        .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
             }
-            return response.json(); // Parse and return the JSON data
+            return response.json();
         })
-        .then(exercises => {
-            exercisesCache = exercises; // Store in cache
-            return exercises;
-        })
-        .catch(function (error) {
+        .catch(error => {
             console.error("Error fetching exercises:", error.message);
-            return []; // Return an empty array in case of an error
+            return [];
         });
 }
 
@@ -45,7 +34,7 @@ function renderExercises(exercises, category) {
     exerciseDisplay.innerHTML = ""; // Clear the display area
 
     const filteredExercises = exercises.filter(
-        (exercise) => exercise.category.toLowerCase() === category.toLowerCase()
+        exercise => exercise.category.toLowerCase() === category.toLowerCase()
     );
 
     if (filteredExercises.length === 0) {
@@ -53,7 +42,7 @@ function renderExercises(exercises, category) {
         return;
     }
 
-    filteredExercises.forEach((exercise) => {
+    filteredExercises.forEach(exercise => {
         const exerciseElement = document.createElement("div");
         exerciseElement.classList.add("exercise-item");
         exerciseElement.innerHTML = `
@@ -70,40 +59,79 @@ let isNonEquipmentVisible = false;
 let isEquipmentVisible = false;
 
 // Button event listeners for exercise categories
-nonEquipmentBtn.addEventListener("click", function() {
+nonEquipmentBtn.addEventListener("click", function () {
     if (isNonEquipmentVisible) {
         exerciseDisplay.innerHTML = ""; // Hide exercises
         isNonEquipmentVisible = false;
     } else {
-        fetchExercises().then(function(exercises) {
-            renderExercises(exercises, "Non-Equipment"); // Show exercises
+        fetchExercises().then(function (exercises) {
+            renderExercises(exercises, "Non-Equipment");
             isNonEquipmentVisible = true;
             isEquipmentVisible = false; // Hide the other category
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.error("Error fetching non-equipment exercises:", error);
         });
     }
 });
 
-equipmentBtn.addEventListener("click", function() {
+equipmentBtn.addEventListener("click", function () {
     if (isEquipmentVisible) {
         exerciseDisplay.innerHTML = ""; // Hide exercises
         isEquipmentVisible = false;
     } else {
-        fetchExercises().then(function(exercises) {
-            renderExercises(exercises, "Equipment"); // Show exercises
+        fetchExercises().then(function (exercises) {
+            renderExercises(exercises, "Equipment");
             isEquipmentVisible = true;
             isNonEquipmentVisible = false; // Hide the other category
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.error("Error fetching equipment exercises:", error);
         });
     }
 });
 
-// Function to get current date in Kenyan Time (EAT)
+// Populate workout types dynamically
+function populateWorkoutTypes() {
+    fetch(`${API_URL}/exercises`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP Error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(exercises => {
+            workoutType.innerHTML = ""; // Clear the dropdown
+            exercises.forEach(exercise => {
+                const option = document.createElement("option");
+                option.value = exercise.id; // Use exercise ID
+                option.textContent = exercise.name;
+                workoutType.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching exercises:", error.message);
+        });
+}
+
+// Fetch MET value for the selected workout
+function fetchMETValue(workoutId) {
+    return fetch(`${API_URL}/exercises/${workoutId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP Error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(exercise => exercise.MET)
+        .catch(error => {
+            console.error("Error fetching MET value:", error.message);
+            return null;
+        });
+}
+
+// Get the current date in EAT
 function getCurrentDateInEAT() {
     const options = {
-        timeZone: "Africa/Nairobi", // EAT timezone
+        timeZone: "Africa/Nairobi",
         weekday: "long",
         year: "numeric",
         month: "long",
@@ -114,73 +142,64 @@ function getCurrentDateInEAT() {
         hour12: true
     };
 
-    const formatter = new Intl.DateTimeFormat("en-US", options);
-    const formattedDate = formatter.format(new Date());
-
-    return formattedDate;  // Returns formatted date string in Kenyan Time (EAT)
-}
-
-// Function to get only the weekday
-function getWeekdayInEAT() {
-    const options = {
-        timeZone: "Africa/Nairobi", // EAT timezone
-        weekday: "long", // Long weekday name (e.g., Monday, Tuesday)
-    };
-
-    const formatter = new Intl.DateTimeFormat("en-US", options);
-    const formattedDay = formatter.format(new Date());
-
-    return formattedDay;  // Returns only the weekday (e.g., Monday)
+    return new Intl.DateTimeFormat("en-US", options).format(new Date());
 }
 
 // Submit workout form
 logWorkoutForm.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
 
-    const workoutType = document.getElementById('workout-type').value.trim();
+    const selectedWorkoutId = workoutType.value;
     const duration = parseFloat(document.getElementById('duration').value);
-    const caloriesBurned = parseFloat(document.getElementById('calories').value);
+    const userWeight = parseFloat(document.getElementById('user-weight').value);
 
-    // Check if all fields are valid
-    if (!workoutType || isNaN(duration) || isNaN(caloriesBurned)) {
+    if (!selectedWorkoutId || isNaN(duration) || isNaN(userWeight)) {
         alert("Please fill in all fields with valid data.");
-        if (!workoutType) workoutType.style.borderColor = "red";
-        if (isNaN(duration)) duration.style.borderColor = "red";
-        if (isNaN(caloriesBurned)) caloriesBurned.style.borderColor = "red";
         return;
     }
 
-    // Prepare workout data to be posted to the server
-    const workoutData = {
-        type: workoutType,
-        duration: duration,
-        calories: caloriesBurned,
-        date: getCurrentDateInEAT()  // Get timestamp in Kenyan Time with day of the week
-    };
+    fetchMETValue(selectedWorkoutId).then(metValue => {
+        if (!metValue) {
+            alert("Failed to fetch MET value for the selected workout.");
+            return;
+        }
 
-    // Post workout data
-    fetch(`${API_URL}/workouts`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(workoutData),
-    })
-        .then(function (response) {
-            if (!response.ok) {
-                throw new Error(`HTTP Error: ${response.status}`);
-            }
-            return response.json(); // Parse response as JSON
+        const durationInHours = duration / 60;
+        const caloriesBurned = (metValue * userWeight * durationInHours).toFixed(2);
+
+        const workoutData = {
+            type: workoutType.options[workoutType.selectedIndex].text,
+            duration: duration,
+            calories: parseFloat(caloriesBurned),
+            date: getCurrentDateInEAT(),
+        };
+
+        fetch(`${API_URL}/workouts`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(workoutData),
         })
-        .then(function (newWorkout) {
-            console.log("Workout added:", newWorkout);
-            updateGoalProgress(newWorkout.calories);  // Update goal progress with the new workout's calories
-            fetchWorkouts(); // Refresh workouts
-            logWorkoutForm.reset(); // Clear form
-        })
-        .catch(function (error) {
-            console.error("Error adding workout:", error.message);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(newWorkout => {
+                console.log("Workout added:", newWorkout);
+                fetchWorkouts();
+                logWorkoutForm.reset();
+
+                  // Update the goal progress after logging the workout
+            updateGoalProgress(parseFloat(caloriesBurned));
+            
+            })
+            .catch(error => {
+                console.error("Error adding workout:", error.message);
+            });
+    });
 });
 
 // Fetch and display workouts
@@ -190,13 +209,11 @@ function fetchWorkouts() {
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
             }
-            return response.json(); // Parse the response body as JSON
+            return response.json();
         })
-        .then(workouts => {
-            renderWorkoutSummary(workouts); // Call render function with the fetched workouts data
-        })
+        .then(workouts => renderWorkoutSummary(workouts))
         .catch(error => {
-            console.error("Error fetching workouts:", error.message); // Log error if fetching fails
+            console.error("Error fetching workouts:", error.message);
         });
 }
 
@@ -206,7 +223,7 @@ function renderWorkoutSummary(workouts) {
     let totalCalories = 0;
 
     workoutSummary.innerHTML = "<h3>Your Workouts</h3>";
-    workouts.forEach((workout) => {
+    workouts.forEach(workout => {
         totalDuration += workout.duration;
         totalCalories += workout.calories;
 
@@ -216,14 +233,14 @@ function renderWorkoutSummary(workouts) {
         `;
         workoutSummary.appendChild(workoutElement);
     });
+       totalCalories = totalCalories.toFixed(2)
 
     workoutSummary.innerHTML += `
         <p><strong>Total Duration:</strong> ${totalDuration} mins</p>
         <p><strong>Total Calories Burned:</strong> ${totalCalories} kcal</p>
     `;
 }
-
-// Creating new goal
+//creating new goal
 function createNewGoal(goalDescription, targetCalories) {
     const newGoal = {
         goalDescription: goalDescription,
@@ -246,6 +263,7 @@ function createNewGoal(goalDescription, targetCalories) {
     .catch(error => console.error("Error creating new goal:", error));
 }
 
+
 // Function to fetch the goal progress
 function fetchGoal() {
     fetch(`${API_URL}/fitnessGoals`)
@@ -267,7 +285,7 @@ function fetchGoal() {
             console.error("Error fetching goal:", error);
         });
 }
-
+// Function to render goal progress
 // Function to render goal progress
 function renderGoalProgress(goal) {
     const totalCaloriesBurned = goal.caloriesBurned || 0;
@@ -276,18 +294,18 @@ function renderGoalProgress(goal) {
         ? ((totalCaloriesBurned / targetCalories) * 100).toFixed(2)
         : 0;
 
-    const currentDateInEAT = getCurrentDateInEAT();
-    const progressBarColor = progressPercentage >= 100 ? 'green' : 'hsl(182, 82%, 39%)';
+        const currentDateInEAT = getCurrentDateInEAT();
+        
 
     goalStatus.innerHTML = `
         <h3>Daily Goal Progress</h3>
         <p><strong>Goal:</strong> ${goal.goalDescription || "No description provided"}</p>
         <p><strong>Target Calories:</strong> ${targetCalories} kcal</p>
         <p><strong>Calories Burned:</strong> ${totalCaloriesBurned} kcal</p>
-         <p><strong>Day:</strong> ${currentDateInEAT}</p>
         <p><strong>Progress:</strong> ${progressPercentage}% completed</p>
+        <p><strong>DAY:</strong> ${currentDateInEAT}</p>  <!-- Display the EAT timestamp -->
         <div style="background-color: lightgray; border-radius: 5px; height: 20px;">
-            <div style="width: ${progressPercentage}%; background-color: ${progressBarColor}; height: 100%; border-radius: 5px;"></div>
+            <div style="width: ${progressPercentage}%; background-color: hsl(182, 82%, 39%); height: 100%; border-radius: 5px;"></div>
         </div>
     `;
     if (progressPercentage >= 100) {
@@ -303,53 +321,69 @@ function updateGoalProgress(caloriesBurned) {
     }
 
     fetch(`${API_URL}/fitnessGoals`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error fetching goals data");
+            }
+            return response.json();
+        })
         .then(goals => {
             if (goals.length > 0) {
-                const currentGoal = goals[goals.length - 1]; // Get the most recent goal
+                const currentGoal = goals[goals.length - 1]; // Get the latest goal
+                const updatedCalories = (currentGoal.caloriesBurned || 0) + caloriesBurned;
+
                 const updatedGoal = {
                     ...currentGoal,
-                    caloriesBurned: currentGoal.caloriesBurned + caloriesBurned,
+                    caloriesBurned: updatedCalories
                 };
 
-                // Update goal progress
                 fetch(`${API_URL}/fitnessGoals/${currentGoal.id}`, {
                     method: "PUT",
                     headers: {
-                        "Content-Type": "application/json",
+                        "Content-Type": "application/json"
                     },
                     body: JSON.stringify(updatedGoal),
                 })
                 .then(response => response.json())
                 .then(updatedGoal => {
-                    console.log("Goal updated:", updatedGoal);
-                    renderGoalProgress(updatedGoal);  // Render the updated goal progress
+                    console.log("Goal updated successfully:", updatedGoal);
+                    fetchGoal();  // Refresh goal display
                 })
                 .catch(error => {
-                    console.error("Error updating goal:", error);
+                    console.error("Error updating goal progress:", error);
+                    alert("There was an issue updating your goal progress.");
                 });
+            } else {
+                alert("No goals found. Please set a goal first!");
             }
         })
         .catch(error => {
-            console.error("Error fetching goal:", error);
+            console.error("Error fetching goals for update:", error);
+            alert("There was an issue fetching your goal.");
         });
 }
 
-// Submit goal form
-goalForm.addEventListener('submit', function (event) {
+// Event listener for the form submission
+goalForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
     const goalDescription = goalDescriptionInput.value.trim();
-    const targetCalories = parseFloat(targetCaloriesInput.value);
+    const targetCalories = parseInt(targetCaloriesInput.value.trim(), 10);
 
-    if (!goalDescription || isNaN(targetCalories)) {
+    if (!goalDescription || isNaN(targetCalories) || targetCalories <= 0) {
         alert("Please enter a valid goal description and target calories.");
         return;
     }
 
     createNewGoal(goalDescription, targetCalories);
+
+    // Clear form inputs after submission
+    goalDescriptionInput.value = '';
+    targetCaloriesInput.value = '';
 });
 
-// Initial page load
+// Initialize: Fetch and display current goal when the page loads
+fetchGoal(); 
+fetchExercises();
 fetchWorkouts();
-fetchGoal();
+populateWorkoutTypes();
