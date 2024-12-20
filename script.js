@@ -14,14 +14,25 @@ const nonEquipmentBtn = document.getElementById('non-equipment-btn');
 const equipmentBtn = document.getElementById('equipment-btn');
 const exerciseDisplay = document.getElementById('exercise-display');
 
+// Cache for exercises
+let exercisesCache = [];
+
 // Fetch and display exercises
 function fetchExercises() {
+    if (exercisesCache.length > 0) {
+        return Promise.resolve(exercisesCache); // Use cached data if available
+    }
+
     return fetch(`${API_URL}/exercises`)
         .then(function (response) {
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
             }
             return response.json(); // Parse and return the JSON data
+        })
+        .then(exercises => {
+            exercisesCache = exercises; // Store in cache
+            return exercises;
         })
         .catch(function (error) {
             console.error("Error fetching exercises:", error.message);
@@ -88,6 +99,8 @@ equipmentBtn.addEventListener("click", function() {
         });
     }
 });
+
+// Function to get current date in Kenyan Time (EAT)
 function getCurrentDateInEAT() {
     const options = {
         timeZone: "Africa/Nairobi", // EAT timezone
@@ -104,7 +117,20 @@ function getCurrentDateInEAT() {
     const formatter = new Intl.DateTimeFormat("en-US", options);
     const formattedDate = formatter.format(new Date());
 
-    return formattedDate;  // Returns formatted date string in EST
+    return formattedDate;  // Returns formatted date string in Kenyan Time (EAT)
+}
+
+// Function to get only the weekday
+function getWeekdayInEAT() {
+    const options = {
+        timeZone: "Africa/Nairobi", // EAT timezone
+        weekday: "long", // Long weekday name (e.g., Monday, Tuesday)
+    };
+
+    const formatter = new Intl.DateTimeFormat("en-US", options);
+    const formattedDay = formatter.format(new Date());
+
+    return formattedDay;  // Returns only the weekday (e.g., Monday)
 }
 
 // Submit workout form
@@ -118,6 +144,9 @@ logWorkoutForm.addEventListener("submit", function (event) {
     // Check if all fields are valid
     if (!workoutType || isNaN(duration) || isNaN(caloriesBurned)) {
         alert("Please fill in all fields with valid data.");
+        if (!workoutType) workoutType.style.borderColor = "red";
+        if (isNaN(duration)) duration.style.borderColor = "red";
+        if (isNaN(caloriesBurned)) caloriesBurned.style.borderColor = "red";
         return;
     }
 
@@ -171,7 +200,6 @@ function fetchWorkouts() {
         });
 }
 
-
 // Render workout summary
 function renderWorkoutSummary(workouts) {
     let totalDuration = 0;
@@ -194,7 +222,8 @@ function renderWorkoutSummary(workouts) {
         <p><strong>Total Calories Burned:</strong> ${totalCalories} kcal</p>
     `;
 }
-//creating new goal
+
+// Creating new goal
 function createNewGoal(goalDescription, targetCalories) {
     const newGoal = {
         goalDescription: goalDescription,
@@ -238,7 +267,7 @@ function fetchGoal() {
             console.error("Error fetching goal:", error);
         });
 }
-// Function to render goal progress
+
 // Function to render goal progress
 function renderGoalProgress(goal) {
     const totalCaloriesBurned = goal.caloriesBurned || 0;
@@ -247,18 +276,18 @@ function renderGoalProgress(goal) {
         ? ((totalCaloriesBurned / targetCalories) * 100).toFixed(2)
         : 0;
 
-        const currentDateInEAT = getCurrentDateInEAT();
-        
+    const currentDateInEAT = getCurrentDateInEAT();
+    const progressBarColor = progressPercentage >= 100 ? 'green' : 'hsl(182, 82%, 39%)';
 
     goalStatus.innerHTML = `
         <h3>Daily Goal Progress</h3>
         <p><strong>Goal:</strong> ${goal.goalDescription || "No description provided"}</p>
         <p><strong>Target Calories:</strong> ${targetCalories} kcal</p>
         <p><strong>Calories Burned:</strong> ${totalCaloriesBurned} kcal</p>
+         <p><strong>Day:</strong> ${currentDateInEAT}</p>
         <p><strong>Progress:</strong> ${progressPercentage}% completed</p>
-        <p><strong>DAY:</strong> ${currentDateInEAT}</p>  <!-- Display the EAT timestamp -->
         <div style="background-color: lightgray; border-radius: 5px; height: 20px;">
-            <div style="width: ${progressPercentage}%; background-color: hsl(182, 82%, 39%); height: 100%; border-radius: 5px;"></div>
+            <div style="width: ${progressPercentage}%; background-color: ${progressBarColor}; height: 100%; border-radius: 5px;"></div>
         </div>
     `;
     if (progressPercentage >= 100) {
@@ -274,68 +303,53 @@ function updateGoalProgress(caloriesBurned) {
     }
 
     fetch(`${API_URL}/fitnessGoals`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Error fetching goals data");
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(goals => {
             if (goals.length > 0) {
-                const currentGoal = goals[goals.length - 1]; // Get the latest goal
-                const updatedCalories = (currentGoal.caloriesBurned || 0) + caloriesBurned;
-
+                const currentGoal = goals[goals.length - 1]; // Get the most recent goal
                 const updatedGoal = {
                     ...currentGoal,
-                    caloriesBurned: updatedCalories
+                    caloriesBurned: currentGoal.caloriesBurned + caloriesBurned,
                 };
 
+                // Update goal progress
                 fetch(`${API_URL}/fitnessGoals/${currentGoal.id}`, {
                     method: "PUT",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
                     },
                     body: JSON.stringify(updatedGoal),
                 })
                 .then(response => response.json())
                 .then(updatedGoal => {
-                    console.log("Goal updated successfully:", updatedGoal);
-                    fetchGoal();  // Refresh goal display
+                    console.log("Goal updated:", updatedGoal);
+                    renderGoalProgress(updatedGoal);  // Render the updated goal progress
                 })
                 .catch(error => {
-                    console.error("Error updating goal progress:", error);
-                    alert("There was an issue updating your goal progress.");
+                    console.error("Error updating goal:", error);
                 });
-            } else {
-                alert("No goals found. Please set a goal first!");
             }
         })
         .catch(error => {
-            console.error("Error fetching goals for update:", error);
-            alert("There was an issue fetching your goal.");
+            console.error("Error fetching goal:", error);
         });
 }
 
-// Event listener for the form submission
-goalForm.addEventListener("submit", function(event) {
+// Submit goal form
+goalForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
     const goalDescription = goalDescriptionInput.value.trim();
-    const targetCalories = parseInt(targetCaloriesInput.value.trim(), 10);
+    const targetCalories = parseFloat(targetCaloriesInput.value);
 
-    if (!goalDescription || isNaN(targetCalories) || targetCalories <= 0) {
+    if (!goalDescription || isNaN(targetCalories)) {
         alert("Please enter a valid goal description and target calories.");
         return;
     }
 
     createNewGoal(goalDescription, targetCalories);
-
-    // Clear form inputs after submission
-    goalDescriptionInput.value = '';
-    targetCaloriesInput.value = '';
 });
 
-// Initialize: Fetch and display current goal when the page loads
-fetchGoal(); 
-fetchExercises();
+// Initial page load
 fetchWorkouts();
+fetchGoal();
