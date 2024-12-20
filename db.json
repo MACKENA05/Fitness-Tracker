@@ -155,26 +155,40 @@
   ],
   "workouts": [
     {
-      "id": "2506",
-      "type": "Squats",
+      "id": "244f",
+      "type": "Running",
       "duration": 30,
-      "calories": 157.5,
-      "date": "Friday, December 20, 2024 at 06:34:32 PM"
+      "calories": 315,
+      "date": "Friday, December 20, 2024 at 09:16:51 PM"
     },
     {
-      "id": "6033",
-      "type": "Weightlifting",
+      "id": "17e0",
+      "type": "Squats",
+      "duration": 20,
+      "calories": 105,
+      "date": "Friday, December 20, 2024 at 09:18:14 PM"
+    },
+    {
+      "id": "bfbb",
+      "type": "Push-Ups",
       "duration": 10,
-      "calories": 70,
-      "date": "Friday, December 20, 2024 at 06:37:38 PM"
+      "calories": 44.33,
+      "date": "Friday, December 20, 2024 at 09:18:28 PM"
+    },
+    {
+      "id": "3b89",
+      "type": "Running",
+      "duration": 60,
+      "calories": 630,
+      "date": "Friday, December 20, 2024 at 09:18:42 PM"
     }
   ],
   "fitnessGoals": [
     {
-      "id": "d351",
-      "goalDescription": "burn 1000 calories daily",
+      "id": "986f",
+      "goalDescription": "Burn 100 calories Daily",
       "targetCalories": 1000,
-      "caloriesBurned": 227.5
+      "caloriesBurned": 1094.33
     }
   ]
 }
