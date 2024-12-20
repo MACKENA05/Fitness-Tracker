@@ -194,7 +194,7 @@ logWorkoutForm.addEventListener("submit", function (event) {
 
                   // Update the goal progress after logging the workout
             updateGoalProgress(parseFloat(caloriesBurned));
-            
+
             })
             .catch(error => {
                 console.error("Error adding workout:", error.message);
@@ -228,8 +228,9 @@ function renderWorkoutSummary(workouts) {
         totalCalories += workout.calories;
 
         const workoutElement = document.createElement("div");
+        workoutElement.id ="workout-logins"
         workoutElement.innerHTML = `
-            <p><strong>${workout.type}</strong> | ${workout.duration} mins | ${workout.calories} calories | ${workout.date}</p>
+            <p><strong>${workout.type}</strong> { ${workout.date} } <br> DURATION: ${workout.duration} mins <br> CALORIES LOST: ${workout.calories} calories</p>
         `;
         workoutSummary.appendChild(workoutElement);
     });
@@ -304,7 +305,7 @@ function renderGoalProgress(goal) {
         <p><strong>Calories Burned:</strong> ${totalCaloriesBurned} kcal</p>
         <p><strong>Progress:</strong> ${progressPercentage}% completed</p>
         <p><strong>DAY:</strong> ${currentDateInEAT}</p>  <!-- Display the EAT timestamp -->
-        <div style="background-color: lightgray; border-radius: 5px; height: 20px;">
+        <div style="background-color: lightgray; border-radius: 5px; height: 30px;">
             <div style="width: ${progressPercentage}%; background-color: hsl(182, 82%, 39%); height: 100%; border-radius: 5px;"></div>
         </div>
     `;
