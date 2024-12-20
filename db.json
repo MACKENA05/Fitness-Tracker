@@ -155,95 +155,32 @@
   ],
   "workouts": [
     {
-      "id": "c1fb",
-      "type": "Running",
-      "duration": 20,
-      "weight": 70,
-      "date": "2024-12-19T18:32:10.012Z",
-      "calories": 196
+      "id": "e8d7",
+      "type": "running",
+      "duration": 30,
+      "calories": 230,
+      "date": "2024-12-20T09:27:21.397Z"
     },
     {
-      "id": "5ec4",
+      "id": "aa0f",
       "type": "pushups",
-      "duration": 20,
-      "weight": 70,
-      "date": "2024-12-19T18:38:42.723Z",
-      "calories": 196
-    },
-    {
-      "id": "485a",
-      "type": "yoga",
-      "duration": 20,
-      "weight": 70,
-      "date": "2024-12-19T18:39:10.723Z",
-      "calories": 196
-    },
-    {
-      "id": "f034",
-      "type": "running",
-      "duration": 30,
-      "weight": 70,
-      "date": "2024-12-19T18:53:25.029Z",
-      "calories": 294
-    },
-    {
-      "id": "6775",
-      "type": "yoga",
-      "duration": 30,
-      "weight": 70,
-      "date": "2024-12-19T18:53:39.820Z",
-      "calories": 294
-    },
-    {
-      "id": "7be9",
-      "type": "yoga",
-      "duration": 30,
-      "weight": 70,
-      "calories": 294
-    },
-    {
-      "id": "9dc6",
-      "type": "running",
-      "duration": 30,
-      "weight": 70,
-      "calories": 294
-    },
-    {
-      "id": "833c",
-      "workoutType": "running",
-      "duration": 50,
-      "userWeight": 70
-    },
-    {
-      "id": "0cef",
-      "type": "running",
-      "duration": 60,
-      "weight": 70,
-      "calories": 588
-    },
-    {
-      "id": "8814",
-      "type": "running",
-      "duration": 20,
-      "weight": 70,
-      "calories": 220.5,
-      "date": "2024-12-19T22:57:31.523Z"
-    },
-    {
-      "id": "3fb5",
-      "type": "running",
-      "duration": 30,
-      "weight": 70,
-      "calories": 330.75,
-      "date": "2024-12-19T23:12:08.087Z"
+      "duration": 40,
+      "calories": 770,
+      "date": "2024-12-20T09:34:37.825Z"
     }
   ],
   "fitnessGoals": [
     {
-      "id": "6000",
+      "id": "d86d",
+      "goalDescription": "burn 1000 calories",
+      "targetCalories": 1000,
+      "caloriesBurned": 1000
+    },
+    {
+      "id": "05e1",
       "goalDescription": "burn 500 calories",
-      "goalCalories": 800,
-      "caloriesBurned": null
+      "targetCalories": 200,
+      "caloriesBurned": 0
     }
   ]
 }
