@@ -153,34 +153,6 @@
       "mediaURL": "./images/running.gif"
     }
   ],
-  "workouts": [
-    {
-      "id": "e8d7",
-      "type": "running",
-      "duration": 30,
-      "calories": 230,
-      "date": "2024-12-20T09:27:21.397Z"
-    },
-    {
-      "id": "aa0f",
-      "type": "pushups",
-      "duration": 40,
-      "calories": 770,
-      "date": "2024-12-20T09:34:37.825Z"
-    }
-  ],
-  "fitnessGoals": [
-    {
-      "id": "d86d",
-      "goalDescription": "burn 1000 calories",
-      "targetCalories": 1000,
-      "caloriesBurned": 1000
-    },
-    {
-      "id": "05e1",
-      "goalDescription": "burn 500 calories",
-      "targetCalories": 200,
-      "caloriesBurned": 0
-    }
-  ]
+  "workouts": [],
+  "fitnessGoals": []
 }

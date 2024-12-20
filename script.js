@@ -88,6 +88,24 @@ equipmentBtn.addEventListener("click", function() {
         });
     }
 });
+function getCurrentDateInEAT() {
+    const options = {
+        timeZone: "Africa/Nairobi", // EAT timezone
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+    };
+
+    const formatter = new Intl.DateTimeFormat("en-US", options);
+    const formattedDate = formatter.format(new Date());
+
+    return formattedDate;  // Returns formatted date string in EST
+}
 
 // Submit workout form
 logWorkoutForm.addEventListener("submit", function (event) {
@@ -108,7 +126,7 @@ logWorkoutForm.addEventListener("submit", function (event) {
         type: workoutType,
         duration: duration,
         calories: caloriesBurned,
-        date: new Date().toISOString() // Adding a timestamp
+        date: getCurrentDateInEAT()  // Get timestamp in Kenyan Time with day of the week
     };
 
     // Post workout data
@@ -152,6 +170,7 @@ function fetchWorkouts() {
             console.error("Error fetching workouts:", error.message); // Log error if fetching fails
         });
 }
+
 
 // Render workout summary
 function renderWorkoutSummary(workouts) {
@@ -228,12 +247,16 @@ function renderGoalProgress(goal) {
         ? ((totalCaloriesBurned / targetCalories) * 100).toFixed(2)
         : 0;
 
+        const currentDateInEAT = getCurrentDateInEAT();
+        
+
     goalStatus.innerHTML = `
         <h3>Daily Goal Progress</h3>
         <p><strong>Goal:</strong> ${goal.goalDescription || "No description provided"}</p>
         <p><strong>Target Calories:</strong> ${targetCalories} kcal</p>
         <p><strong>Calories Burned:</strong> ${totalCaloriesBurned} kcal</p>
         <p><strong>Progress:</strong> ${progressPercentage}% completed</p>
+        <p><strong>DAY:</strong> ${currentDateInEAT}</p>  <!-- Display the EAT timestamp -->
         <div style="background-color: lightgray; border-radius: 5px; height: 20px;">
             <div style="width: ${progressPercentage}%; background-color: hsl(182, 82%, 39%); height: 100%; border-radius: 5px;"></div>
         </div>
