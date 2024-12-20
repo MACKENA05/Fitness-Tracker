@@ -39,6 +39,25 @@
         </section>
 
         <div class="container">
+            <!-- Goal Section -->
+            <section class="goalsleft">
+                <h2 id="goal-section">Set a Fitness Goal</h2>
+                <form id="goal-form">
+                    <label for="goal-description">Goal Description:</label>
+                    <input type="text" id="goal-description" placeholder="e.g., Burn 500 calories daily" required><br><br>
+
+                    <label for="goal-calories">Target Calories:</label>
+                    <input type="number" id="goal-calories" placeholder="e.g., 500" required><br><br>
+
+                    <button type="submit">Set Goal</button>
+                </form>
+
+                <h2>Daily Goal Progress</h2>
+                <div id="goal-status">
+                    <!-- Goal progress will be displayed here -->
+                </div>
+            </section>
+
             <!-- Workout Section -->
             <section class="workoutright">
                 <h2>Log Workout</h2>
@@ -60,25 +79,6 @@
                 <h2>Workout Summary</h2>
                 <div id="summary-info">
                     <!-- Workout summary will be displayed here -->
-                </div>
-            </section>
-
-               <!-- Goal Section -->
-               <section class="goalsleft">
-                <h2 id="goal-section">Set a Fitness Goal</h2>
-                <form id="goal-form">
-                    <label for="goal-description">Goal Description:</label>
-                    <input type="text" id="goal-description" placeholder="e.g., Burn 500 calories daily" required><br><br>
-
-                    <label for="goal-calories">Target Calories:</label>
-                    <input type="number" id="goal-calories" placeholder="e.g., 500" required><br><br>
-
-                    <button type="submit">Set Goal</button>
-                </form>
-
-                <h2>Daily Goal Progress</h2>
-                <div id="goal-status">
-                    <!-- Goal progress will be displayed here -->
                 </div>
             </section>
         </div>
