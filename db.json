@@ -181,6 +181,13 @@
       "duration": 60,
       "calories": 630,
       "date": "Friday, December 20, 2024 at 09:18:42 PM"
+    },
+    {
+      "id": "d6f1",
+      "type": "Lunges",
+      "duration": 20,
+      "calories": 105,
+      "date": "Friday, December 20, 2024 at 10:22:21 PM"
     }
   ],
   "fitnessGoals": [
@@ -189,6 +196,12 @@
       "goalDescription": "Burn 100 calories Daily",
       "targetCalories": 1000,
       "caloriesBurned": 1094.33
+    },
+    {
+      "id": "e235",
+      "description": "Burn 1000cal daily",
+      "targetCalories": 1000,
+      "caloriesBurned": 105
     }
   ]
 }
