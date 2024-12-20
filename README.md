@@ -14,7 +14,7 @@ Welcome to the **NextStep Fitness Tracker Web Application**! This app helps you 
 - [Contributing](#contributing)
 - [License](#license)
 
-## Features
+## Features  
 
 - **Workout Logging**: Easily log your workout details such as type, duration, and weight.
 - **Exercise Categories**: Filter and explore exercises based on equipment availability (Non-Equipment and Equipment exercises).
@@ -71,6 +71,13 @@ Follow these steps to run the project locally:
 `NB:`  Make sure your server is always running
 ## Usage
 
+### Setting Goals
+
+1. Navigate to the "Goal" section.
+2. Enter a description for your goal (e.g., "Burn 2000 calories").
+3. Set your target calorie goal.
+4. Submit the form to create the goal and track your progress.
+
 ### Logging Workouts
 
 1. Select the workout type from the dropdown.
@@ -78,12 +85,6 @@ Follow these steps to run the project locally:
 3. Input your weight for calorie calculation.
 4. Submit the form to log the workout and view the calories burned.
 
-### Setting Goals
-
-1. Navigate to the "Goal" section.
-2. Enter a description for your goal (e.g., "Burn 2000 calories").
-3. Set your target calorie goal.
-4. Submit the form to create the goal and track your progress.
 
 ### Viewing Progress
 
